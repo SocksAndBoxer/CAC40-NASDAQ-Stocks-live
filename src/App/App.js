@@ -20,10 +20,30 @@ class App extends Component {
     this.timer = this.interval();
   }
 
+  changeStock = (evt) => {
+    const id = evt.target.id;
+    const value = evt.target.innerHTML;
+    const stock = evt.target.className;
+    if(!isNaN(value)) {
+      if(stock === "cacValue") {
+        const cac = [...this.state.cac];
+        cac[id] = value;
+        this.setState({ cac });
+        console.log(this.state.cac);
+      }
+      if(stock === "nasdaqValue") {
+        const nasdaq = [...this.state.nasdaq];
+        nasdaq[id] = value;
+        this.setState({ nasdaq });
+        console.log(this.state.nasdaq);
+      }
+      this.launchTimer()
+    };
+    console.log(evt.target.className);
+  }
+
   stopTimer = (evt) => {
-    console.log(evt.target);
     clearInterval(this.timer);
-    // getElementsByTagName(evt.target)
   }
 
   launchTimer = () => {
@@ -50,7 +70,7 @@ class App extends Component {
         </div>
         <StockLineChart className="LineChart" cac={cac} nasdaq={nasdaq} />
         <div className="table">
-          <Table cac={cac} nasdaq={nasdaq} onClickHandler={this.stopTimer} />
+          <Table cac={cac} nasdaq={nasdaq} onClickHandler={this.stopTimer} onChangeHandler={this.changeStock}/>
         </div>
       </div>
    )

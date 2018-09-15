@@ -6,11 +6,19 @@ import './Table.css';
 export default class Table extends Component {
 
   render() {
-    const { cac, nasdaq, onClickHandler } = this.props
+    const { cac, nasdaq, onClickHandler, onChangeHandler } = this.props
 
     const handleClick = (evt) => {
       evt.preventDefault();
       onClickHandler(evt);
+    }
+
+    const keyPress = (evt) => {
+      if (evt.keyCode === 13) {
+        evt.preventDefault();
+        console.log(evt.target.id);
+        onChangeHandler(evt);
+      }
     }
 
     return (
@@ -19,11 +27,11 @@ export default class Table extends Component {
           <tbody>
             <tr>
               <th>CAC40</th>
-              {cac.map((value, index) => <td onClick={handleClick} key={index}>{parseFloat(value).toFixed(2)}</td>)}
+              {cac.map((value, index) => <td className="cacValue" id={index} contentEditable='true' onClick={handleClick} onKeyDown={keyPress} key={index}>{parseFloat(value).toFixed(2)}</td>)}
             </tr>
             <tr>
               <th>NASDAQ</th>
-              {nasdaq.map((value, index) => <td onClick={handleClick} key={index}>{parseFloat(value).toFixed(2)}</td>)}
+              {nasdaq.map((value, index) => <td className="nasdaqValue" id={index} contentEditable='true' onClick={handleClick} onKeyDown={keyPress} key={index}>{parseFloat(value).toFixed(2)}</td>)}
             </tr>
             </tbody>
         </table>
