@@ -8,11 +8,13 @@ export default class Table extends Component {
   render() {
     const { cac, nasdaq, onClickHandler, onChangeHandler } = this.props
 
+    // Handle click to pause the app
     const handleClick = (evt) => {
       evt.preventDefault();
       onClickHandler(evt);
     }
 
+    // After the user press enter, insert the entry in the data
     const keyPress = (evt) => {
       if (evt.keyCode === 13) {
         evt.preventDefault();

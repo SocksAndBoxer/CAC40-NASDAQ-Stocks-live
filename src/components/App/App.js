@@ -11,15 +11,17 @@ class App extends Component {
     cac: []
   }
 
+  // Fetch the API every second
   interval = () => setInterval(() => (axios.get("http://127.0.0.1:8000?count=20")
-    // .then(data => this.setState({ data: data.data }))
     .then(data => this.transformData(data.data))
     .catch(error => console.log(error))), 1000);
 
+  // Launch timer
   componentDidMount() {
     this.timer = this.interval();
   }
 
+  // Put the value that the user entered into the data
   changeStock = (evt) => {
     const id = evt.target.id;
     const value = evt.target.innerHTML;
@@ -42,14 +44,17 @@ class App extends Component {
     console.log(evt.target.className);
   }
 
+  // Stop the timer
   stopTimer = (evt) => {
     clearInterval(this.timer);
   }
 
+  // Launch the timer
   launchTimer = () => {
     this.timer = this.interval();
   }
 
+  // Transform the data so we can use it in the line chart and table
   transformData = (stocks) => {
     const stockValues = stocks.map(stock => Object.values(stock.stocks).map( name => name));
     const nasdaqValues = stockValues.map(num => (num[0]).toString().slice(0, -5));
