@@ -10,7 +10,7 @@ class StockLineChart extends Component {
     // Finding highest value for the line chart Y axis
     const maxCac = Math.max(parseFloat(cac));
     const maxNasdaq = Math.max(parseFloat(nasdaq));
-    const yScale = maxCac > maxNasdaq ? (Math.round(maxCac) + 10 ) : (Math.round(maxNasdaq) + 10 );
+    const yScale = maxCac > maxNasdaq ? (Math.round(maxCac) + 50 ) : (Math.round(maxNasdaq) + 50 );
 
     // Making the object needed by the LineChart component
     const data = cac.map((value, index) => {

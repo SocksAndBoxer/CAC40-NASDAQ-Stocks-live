@@ -37,7 +37,7 @@ class App extends Component {
         this.setState({ nasdaq });
         console.log(this.state.nasdaq);
       }
-      this.launchTimer()
+      setTimeout(() => { this.launchTimer() }, 5000);
     };
     console.log(evt.target.className);
   }
